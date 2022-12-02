@@ -100,11 +100,12 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5, 3, 0) => Math.PI/2
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
+ * Tue Apr 05 2016 06:00:00 GMT+0300 (Москва, стандартное время)
  */
-function angleBetweenClockHands(/* date */) {
-  throw new Error('Not implemented');
+function angleBetweenClockHands(date) {
+  return Math.abs(0.5 * (60 * (date.getUTCHours() - 1) - 11 * date.getUTCMinutes()));
 }
-
+console.log(angleBetweenClockHands(new Date(Date.UTC(2016, 3, 5, 3, 0))));
 module.exports = {
   parseDataFromRfc2822,
   parseDataFromIso8601,

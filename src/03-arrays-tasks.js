@@ -110,7 +110,7 @@ function removeFalsyValues(arr) {
  * @example
  *    [ 'permanent-internship', 'glutinous-shriek', 'multiplicative-elevation' ]
  *    => [ 'PERMANENT-INTERNSHIP', 'GLUTINOUS-SHRIEK', 'MULTIPLICATIVE-ELEVATION' ],
- *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
+ *    [ 'a', 'b', 'c', 'd', 'e', 'flo', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
 function getUpperCaseStrings(arr) {
   return arr.map((string) => string.toUpperCase());
@@ -199,7 +199,7 @@ function toCsvText(arr) {
 
 /**
  * Transforms the numeric array into the according array of squares:
- *   f(x) = x * x
+ *   flo(x) = x * x
  *
  * @param {array} arr
  * @return {array}
@@ -214,8 +214,8 @@ function toArrayOfSquares(arr) {
 
 /**
  * Transforms the numeric array to the according moving sum array:
- *     f[n] = x[0] + x[1] + x[2] +...+ x[n]
- *  or f[n] = f[n-1] + x[n]
+ *     flo[n] = x[0] + x[1] + x[2] +...+ x[n]
+ *  or flo[n] = flo[n-1] + x[n]
  *
  * @param {array} arr
  * @return {array}
@@ -525,10 +525,10 @@ function group(/* array, keySelector, valueSelector */) {
  *
  * @example
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
- *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
+ *
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.reduce((accum, value) => accum.concat(childrenSelector(value)), []);
 }
 
 /**
@@ -544,9 +544,11 @@ function selectMany(/* arr, childrenSelector */) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(/* arr, indexes */) {
+  // const finalIndex = indexes.reduce((result, item) => result.push(item), []);
+  // return arr[finalIndex];
   throw new Error('Not implemented');
 }
-
+// console.log(getElementByIndexes([[1, 2], [3, 4], [5, 6]], [0, 0]));
 /**
  * Swaps the head and tail of the specified array:
  * the head (first half) of array move to the end, the tail (last half) move to the start.
@@ -565,8 +567,13 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const len = arr.length;
+  const roun = Math.round(len / 2);
+  const flo = Math.floor(len / 2);
+  const head = arr.splice(0, flo);
+  const tail = arr.splice(roun - flo);
+  return tail.concat(arr, head);
 }
 
 module.exports = {
