@@ -46,7 +46,7 @@ function getComposition(/* f, g */) {
  *
  */
 function getPowerFunction(exponent) {
-  return function (x) {
+  return function smth(x) {
     return x ** exponent;
   };
 }
@@ -66,17 +66,17 @@ function getPowerFunction(exponent) {
  */
 function getPolynom(a, b, c) {
   if (arguments.length === 3) {
-    return function (x) {
+    return function smth(x) {
       return a * x ** a + b * x + c;
     };
   }
   if (arguments.length === 2) {
-    return function (x) {
+    return function smth(x) {
       return a * x + b;
     };
   }
   if (arguments.length === 1) {
-    return function () {
+    return function smth() {
       return a;
     };
   }
@@ -99,7 +99,7 @@ function getPolynom(a, b, c) {
  */
 function memoize(func) {
   const result = func();
-  return function () {
+  return function smth() {
     return result;
   };
 }
@@ -121,7 +121,7 @@ function memoize(func) {
  */
 function retry(func, attempts) {
   // eslint-disable-next-line consistent-return
-  return function () {
+  return function smth() {
     for (let i = 0; i < attempts; i += 1) {
       try {
         return func();
