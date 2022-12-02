@@ -24,6 +24,9 @@
  */
 function getComposition(/* f, g */) {
   throw new Error('Not implemented');
+  // return function () {
+  //   return f.bind(this, g.apply(this));
+  // };
 }
 
 /**
@@ -42,8 +45,10 @@ function getComposition(/* f, g */) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return function (x) {
+    return x ** exponent;
+  };
 }
 
 /**
@@ -59,8 +64,23 @@ function getPowerFunction(/* exponent */) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(a, b, c) {
+  if (arguments.length === 3) {
+    return function (x) {
+      return a * x ** a + b * x + c;
+    };
+  }
+  if (arguments.length === 2) {
+    return function (x) {
+      return a * x + b;
+    };
+  }
+  if (arguments.length === 1) {
+    return function () {
+      return a;
+    };
+  }
+  return null;
 }
 
 /**
@@ -77,8 +97,11 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  const result = func();
+  return function () {
+    return result;
+  };
 }
 
 /**
@@ -96,8 +119,18 @@ function memoize(/* func */) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  // eslint-disable-next-line consistent-return
+  return function () {
+    for (let i = 0; i < attempts; i += 1) {
+      try {
+        return func();
+      } catch (err) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+    }
+  };
 }
 
 /**
