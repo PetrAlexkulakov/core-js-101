@@ -103,7 +103,9 @@ function timeSpanToString(startDate, endDate) {
  * Tue Apr 05 2016 06:00:00 GMT+0300 (Москва, стандартное время)
  */
 function angleBetweenClockHands(date) {
-  return Math.abs(0.5 * (60 * (date.getUTCHours() - 1) - 11 * date.getUTCMinutes()));
+  let result = Math.abs(0.5 * (60 * (date.getUTCHours()) - 11 * date.getUTCMinutes())) % 360;
+  result = Math.min(result, Math.abs(360 - result));
+  return ((result * Math.PI) / 180) % (2 * Math.PI);
 }
 
 module.exports = {
